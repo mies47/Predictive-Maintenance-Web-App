@@ -22,9 +22,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: `%s - nuxtjs-vuetify-dashboard${
-      (!isProduction && ' - Dev') || ''
-    }`,
+    titleTemplate: `%s ${(!isProduction && ' - Dev') || ''}`,
     title,
     description,
     htmlAttrs: {

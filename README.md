@@ -1,6 +1,7 @@
 # Predictive Maintenance Web App Dashboard
 
 The front-end admin dashboard of the predictive maintenance project. The base setup is imported from [nuxtjs-vuetify-dashboard](https://github.com/devcoderoad/nuxtjs-vuetify-dashboard)
+
 ## Build Setup
 
 ```bash
