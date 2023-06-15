@@ -13,8 +13,8 @@ const { title, description, lang } = GLOBAL
 
 const BASEURL =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000'
-    : 'https://nuxtjs-vuetify-dashboard.netlify.app'
+    ? 'http://localhost:2323' + ROUTES.API.route
+    : 'https://nuxtjs-vuetify-dashboard.netlify.app' + ROUTES.API.route
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -95,7 +95,27 @@ export default {
 
   // Auth-nuxt module options: https://auth.nuxtjs.org/guide
   auth: {
-    // Options
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true
+        },
+        user: {
+          property: false
+        },
+        endpoints: {
+          login: { url: `${BASEURL}/login/admin`, method: 'post' },
+          user: { url: `${BASEURL}/admin/me`, method: 'get' }
+        }
+      }
+    },
+    redirect: {
+      login: '/sign-in',
+      logout: '/sign-in',
+      callback: false,
+      home: '/'
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -174,7 +194,8 @@ export default {
         nuxtRoutes.unshift(...routes)
         nuxtRoutes.length = nuxtRoutes.length - totalExistingRoutes
       }
-    }
+    },
+    middleware: ['auth']
   },
 
   // https://nuxtjs.org/docs/configuration-glossary/configuration-servermiddleware

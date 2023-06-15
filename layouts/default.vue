@@ -162,7 +162,7 @@
           <!-- <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item> -->
-          <v-list-item :to="`/sign-in`">
+          <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout-variant</v-icon>
             </v-list-item-icon>
@@ -402,6 +402,13 @@ export default {
     toTop() {
       const { $vuetify } = this
       $vuetify.goTo(0)
+    },
+    async logout() {
+      try {
+        await this.$auth.logout()
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

@@ -3,80 +3,117 @@
     <v-flex lg6>
       <v-row no-gutters>
         <v-container fluid class="pb-12">
-          <h1 class="text-center">Sign in to your Nuxtify account</h1>
-          <v-col cols="12" class="text-center">
-            to enjoy all of our cool
-            <a class="primary--text">features</a> ✌️
-          </v-col>
+          <h1 class="text-center">Sign In To Your Admin Account</h1>
         </v-container>
       </v-row>
       <v-col>
-        <v-card elevation="2" light class="bg-wave">
-          <v-card-title> Login to Your Account </v-card-title>
-          <v-form v-model="valid" name="form-login" @submit="onSubmit()">
-            <v-container>
-              <v-row class="text-left">
-                <v-col cols="12" md="12">
-                  <v-text-field
-                    v-model.trim="vemail"
-                    type="text"
-                    label="Email"
-                    outlined
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="12">
-                  <v-text-field
-                    v-model.trim="vpassword"
-                    type="password"
-                    name="password"
-                    label="Password"
-                    outlined
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6">
-                  <v-btn type="submit" color="primary">Login</v-btn>
-                </v-col>
-                <v-col cols="12" md="6" class="text-right">
-                  <nuxt-link to="/forgot-password">Forgot Password</nuxt-link>
-                  or
-                  <nuxt-link to="/">Back</nuxt-link>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-form>
+        <v-card
+          elevation="2"
+          class="bg-wave"
+          style="background: rgba(255, 255, 255, 0.5)"
+        >
+          <v-container>
+            <v-row class="text-left">
+              <v-col cols="12" md="12">
+                <v-text-field
+                  v-model.trim="email"
+                  type="text"
+                  label="Email"
+                  :error-messages="emailErrors"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="12">
+                <v-text-field
+                  v-model.trim="password"
+                  type="password"
+                  name="password"
+                  label="Password"
+                  :error-messages="passwordErrors"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-btn :loading="isLoading" color="primary" @click="handleLogin"
+                  >Login</v-btn
+                >
+              </v-col>
+              <v-col cols="12" md="6" class="text-right my-auto">
+                Don't have an account?
+                <nuxt-link to="/sign-up">Sign Up</nuxt-link>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card>
       </v-col>
-      <v-col>
-        Don't have an account?
-        <nuxt-link to="/sign-up">Sign Up</nuxt-link>
-      </v-col>
+      <SnackBar :show="showError" :text="error" @close="showError = false" />
     </v-flex>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import { validationMixin } from 'vuelidate'
+import { required, email } from 'vuelidate/lib/validators'
+import SnackBar from './SnackBar.vue'
+
 export default Vue.extend({
   name: 'FormSignIn',
-  props: {
-    email: { type: String, default: '' },
-    password: { type: String, default: '' }
+  components: { SnackBar },
+  mixins: [validationMixin],
+  validations: {
+    email: { required, email },
+    password: { required }
   },
   data() {
-    const { email, password } = this
-    return { vemail: email, vpassword: password, valid: false }
+    return {
+      email: '',
+      password: '',
+      error: '',
+      showError: false,
+      isLoading: false
+    }
+  },
+  computed: {
+    emailErrors() {
+      const errors = []
+      if (!this.$v.email.$dirty) return errors
+      !this.$v.email.email && errors.push('Must be valid e-mail')
+      !this.$v.email.required && errors.push('E-mail is required')
+      return errors
+    },
+    passwordErrors() {
+      const errors = []
+      if (!this.$v.password.$dirty) return errors
+      !this.$v.password.required && errors.push('Password is required')
+      return errors
+    }
   },
   methods: {
-    onSubmit() {
-      return console.log('submit')
-    },
-    onSubmitSuccess() {
-      return console.log('success')
-    },
-    onSubmitError() {
-      return console.log('error')
+    handleLogin() {
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.isLoading = true
+        this.$auth
+          .loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
+          .then(() => {})
+          .catch((error) => {
+            this.error = error.response?.data?.detail || error.toString()
+            this.showError = true
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      }
     }
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormSignIn :email="email" :password="password" />
+    <FormSignIn />
     <span
       ><img src="/nuxt.png" height="12" /> Nuxtify &copy;
       {{ new Date().getFullYear() }} {{ company }}. Dark Mode:
@@ -17,8 +17,6 @@ export default {
   layout: 'blank',
   data() {
     return {
-      email: '',
-      password: '',
       company: global.company
     }
   },
