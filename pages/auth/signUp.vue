@@ -1,11 +1,10 @@
 <template>
   <div>
-    <FormSignUp :email="email" :password="password" />
+    <FormSignUp />
     <span
       ><img src="/nuxt.png" height="12" /> Nuxtify &copy;
-      {{ new Date().getFullYear() }} {{ company }}. Dark Mode:
-      <code>{{ isDark }}</code></span
-    >
+      {{ new Date().getFullYear() }} {{ company }}.
+    </span>
   </div>
 </template>
 
@@ -15,10 +14,9 @@ import global from '~/constants/global'
 
 export default {
   layout: 'blank',
+  auth: 'guest',
   data() {
     return {
-      email: '',
-      password: '',
       company: global.company
     }
   },
