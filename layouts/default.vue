@@ -121,29 +121,6 @@
       </v-btn> -->
       <!-- <v-toolbar-title v-text="title" /> -->
       <v-spacer />
-      <v-col
-        align-self="center"
-        :cols="searchLength ? '7' : '3'"
-        :sm="searchLength ? '3' : '2'"
-        :lg="searchLength ? '2' : '1'"
-      >
-        <v-text-field
-          v-model="search"
-          :full-width="true"
-          :hide-details="true"
-          :height="`100%`"
-          :placeholder="searchLength ? 'Search' : ''"
-          name="search"
-          prepend-inner-icon="mdi-magnify"
-          maxlength="20"
-          dense
-          solo
-          flat
-          @focus="searchFocus"
-          @focusout="searchFocus"
-        >
-        </v-text-field>
-      </v-col>
       <v-btn small icon @click.stop="setTheme">
         <!-- <v-btn icon @click.stop="handledarkmode"> -->
         <v-icon>mdi-invert-colors</v-icon>
@@ -154,8 +131,22 @@
       </v-btn> -->
       <v-menu transition="slide-y-transition" bottom top>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn small icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-menu</v-icon>
+          <v-btn icon v-bind="attrs" width="auto" v-on="on">
+            <v-row align="center">
+              <v-col cols="auto">
+                <v-icon>mdi-account-circle-outline</v-icon>
+              </v-col>
+              <v-col>
+                <v-row>
+                  {{ $auth.user?.name }}
+                </v-row>
+                <v-row>
+                  <small>
+                    {{ $auth.user?.email }}
+                  </small>
+                </v-row>
+              </v-col>
+            </v-row>
           </v-btn>
         </template>
         <v-list class="pl-2 pr-4">
@@ -168,22 +159,6 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title> Logout </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :to="`/profile`">
-            <v-list-item-icon>
-              <v-icon>mdi-account-circle-outline</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title> Profile </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item to="/settings">
-            <v-list-item-icon>
-              <v-icon>mdi-cog-outline</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title> {{ title }} Setting </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
