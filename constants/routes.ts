@@ -32,6 +32,11 @@ const DASHBOARD = {
     route: '/nodes/:nodeId',
     url: '/nodes/:nodeId'
   },
+  Gateways: {
+    href: '/gateways.vue',
+    route: '/gateways',
+    url: '/gateways'
+  },
   FORM: {
     href: '/forms.vue',
     route: '/forms',

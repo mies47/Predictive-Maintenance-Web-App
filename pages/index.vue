@@ -28,46 +28,6 @@
             There are currently no active nodes or an error has occured!
           </v-col>
         </v-row>
-        <h2 class="my-5">Active Gateways</h2>
-        <v-row style="min-height: 20vh">
-          <v-col
-            v-for="gateway in gateways"
-            :key="gateway.mac"
-            cols="12"
-            sm="6"
-            lg="4"
-          >
-            <v-card height="100%" class="card" :to="`/gateway/${gateway.mac}`">
-              <v-container fluid>
-                <v-row height="100%">
-                  <v-col cols="9" align-self="center" align="center">
-                    <div>MAC: {{ gateway.mac }}</div>
-                    <div>
-                      Verified:
-                      <v-icon
-                        small
-                        :color="gateway.is_verified ? 'green' : 'red'"
-                      >
-                        {{ gateway.is_verified ? 'mdi-check' : 'mdi-close' }}
-                      </v-icon>
-                    </div>
-                  </v-col>
-                  <v-col cols="3" align-self="center" align="center">
-                    <v-icon size="60" color="blue">mdi-router-wireless</v-icon>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-col>
-          <v-col
-            v-if="gateways.length == 0"
-            cols="12"
-            align-self="center"
-            class="text-center grey--text"
-          >
-            There are currently no active gateways or an error has occured!
-          </v-col>
-        </v-row>
       </v-col>
     </v-row>
     <v-overlay :value="loading">
@@ -107,8 +67,7 @@ export default {
         }
       },
       loading: true,
-      nodes: [],
-      gateways: []
+      nodes: []
     }
   },
   head() {
@@ -130,7 +89,6 @@ export default {
       .$get('/gateway/all')
       .then((data) => {
         this.summary.gateway.summary = data.length
-        this.gateways = data
       })
       .catch((error) => {
         console.log(error)

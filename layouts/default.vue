@@ -236,6 +236,11 @@ export default {
           to: '/nodes'
         },
         {
+          icon: 'mdi-router-wireless',
+          title: 'Gateways',
+          to: '/gateways'
+        },
+        {
           icon: 'mdi-chart-bar',
           title: 'Charts',
           to: '/charts'
