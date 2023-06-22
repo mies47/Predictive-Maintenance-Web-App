@@ -231,6 +231,11 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-vibrate',
+          title: 'Nodes',
+          to: '/nodes'
+        },
+        {
           icon: 'mdi-chart-bar',
           title: 'Charts',
           to: '/charts'

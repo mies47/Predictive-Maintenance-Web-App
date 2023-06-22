@@ -22,10 +22,15 @@ const DASHBOARD = {
     route: '/',
     url: '/'
   },
+  NODES: {
+    href: '/nodes/index.vue',
+    route: '/nodes/',
+    url: '/nodes/'
+  },
   NODE: {
-    href: '/node/_nodeId.vue',
-    route: '/node/:nodeId',
-    url: '/node/:nodeId'
+    href: '/nodes/_nodeId.vue',
+    route: '/nodes/:nodeId',
+    url: '/nodes/:nodeId'
   },
   FORM: {
     href: '/forms.vue',

@@ -6,7 +6,7 @@
         <h2 class="my-5">Active Nodes</h2>
         <v-row style="min-height: 20vh">
           <v-col v-for="node in nodes" :key="node" cols="12" sm="6" lg="4">
-            <v-card height="100%" class="card" :to="`/node/${node}`">
+            <v-card height="100%" class="card" :to="`/nodes/${node}`">
               <v-container fluid>
                 <v-row height="100%">
                   <v-col cols="9" align-self="center" align="center">
