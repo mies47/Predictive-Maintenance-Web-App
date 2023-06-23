@@ -1,10 +1,5 @@
 <template>
   <v-app id="default" :dark="isDark">
-    <SeoHead />
-    <!-- <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped" -->
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -14,34 +9,16 @@
       floating
       styles="height: calc(100% - 2rem); top: 0px; max-height: calc(100% - 0px)"
     >
-      <!-- src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&h=987&q=80" -->
-      <!-- class="rounded ml-3 mt-4" -->
-      <!-- class="no-border elevation-2 rounded ml-3 mt-4" -->
       <nuxt-link to="/" class="no-underline success--text">
         <v-flex
           align-self-center
           class="text-center justify-center align-center"
           style="height: 33px"
         >
-          <!-- <h4 :class="`${miniVariant ? 'subtitle-2' : ''} my-6`" v-text="title" -->
           <h4 class="my-6" v-text="title"
         /></v-flex>
       </nuxt-link>
-      <!-- <v-container fluid class="accent darken-2">
-        <v-row>
-          <v-col cols="3">
-            <v-avatar
-              color="primary"
-              size="35"
-              v-html="title.substring(0, 1)"
-            ></v-avatar>
-          </v-col>
-          <v-col cols="9">
-            <h5>John Doe</h5>
-            <h6>Web Administrator</h6>
-          </v-col>
-        </v-row>
-      </v-container> -->
+
       <v-list :dark="isDark">
         <slot v-for="(item, i) in items">
           <v-list-group
@@ -90,9 +67,6 @@
         </slot>
       </v-list>
     </v-navigation-drawer>
-    <!-- <v-app-bar
-      :clipped-left="clipped" 
-      elevate-on-scroll -->
     <v-app-bar
       :color="isDark ? 'default' : 'white'"
       :dark="isDark"
@@ -113,22 +87,10 @@
       >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
-      <!-- <v-btn small icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn> -->
-      <!-- <v-btn small icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn> -->
-      <!-- <v-toolbar-title v-text="title" /> -->
       <v-spacer />
       <v-btn small icon @click.stop="setTheme">
-        <!-- <v-btn icon @click.stop="handledarkmode"> -->
         <v-icon>mdi-invert-colors</v-icon>
       </v-btn>
-      <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer"> -->
-      <!-- <v-btn icon @click.stop="setProfileMenu">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn> -->
       <v-menu transition="slide-y-transition" bottom top>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" width="auto" v-on="on">
@@ -150,9 +112,6 @@
           </v-btn>
         </template>
         <v-list class="pl-2 pr-4">
-          <!-- <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item> -->
           <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout-variant</v-icon>
@@ -211,17 +170,13 @@
 <script>
 import { mapState } from 'vuex'
 import global from '~/constants/global'
-import SeoHead from '~/components/SeoHead'
 
 export default {
   name: 'LayoutDefault',
-  components: { SeoHead },
   data() {
     return {
-      title: 'Nuxtify',
+      title: 'AUT Predictive Maintenance',
       company: global.company,
-      // clipped: false,
-      // fixed: false,
       drawer: false,
       overlay: true,
       items: [
@@ -244,96 +199,6 @@ export default {
           icon: 'mdi-account',
           title: 'Users',
           to: '/users'
-        },
-        {
-          icon: 'mdi-chart-bar',
-          title: 'Charts',
-          to: '/charts'
-        },
-        {
-          icon: 'mdi-table-large',
-          title: 'Tables',
-          to: '/tables'
-        },
-        {
-          icon: 'mdi-format-list-bulleted',
-          title: 'Tabs',
-          to: '/tabs'
-        },
-        {
-          icon: 'mdi-message-bulleted',
-          title: 'Forms',
-          to: '/forms'
-        },
-        {
-          icon: 'mdi-cards',
-          title: 'Cards',
-          to: '/cards'
-        },
-        {
-          icon: 'mdi-account-card',
-          title: 'Authentication',
-          to: null,
-          items: [
-            {
-              icon: 'mdi-login-variant',
-              title: 'Sign In',
-              to: '/sign-in'
-            },
-            {
-              icon: 'mdi-account',
-              title: 'Profile',
-              to: '/profile'
-            },
-            {
-              icon: 'mdi-account-plus',
-              title: 'Sign Up',
-              to: '/sign-up'
-            },
-            {
-              icon: 'mdi-account-key',
-              title: 'Forgot Password',
-              to: '/forgot-password'
-            }
-          ]
-        },
-        {
-          icon: 'mdi-flag',
-          title: 'Filters',
-          to: '/filters'
-        },
-        {
-          icon: 'mdi-material-ui',
-          title: 'Icons',
-          to: '/icons'
-        },
-        {
-          icon: 'mdi-pencil-box',
-          title: 'Typography',
-          // to: '/typography',
-          to: null,
-          items: [
-            {
-              icon: 'mdi-pencil-lock',
-              title: 'Paragraph',
-              to: '/paragraph'
-            },
-            {
-              icon: 'mdi-pencil',
-              title: 'Headings',
-              to: '/headings'
-            },
-            {
-              icon: 'mdi-grease-pencil',
-              title: 'Typographies',
-              to: '/typography'
-            }
-          ]
-        },
-        {
-          icon: 'mdi-book-multiple',
-          title: 'Landing',
-          to: '/landing'
         }
       ],
       miniVariant: false,
@@ -381,9 +246,6 @@ export default {
       this.searchLength = !this.searchLength
       this.search = ''
     },
-    // setProfileMenu() {
-    // return console.log('setProfileMenu')
-    // },
     onScroll(e) {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0

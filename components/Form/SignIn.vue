@@ -7,11 +7,7 @@
         </v-container>
       </v-row>
       <v-col>
-        <v-card
-          elevation="2"
-          class="bg-wave"
-          style="background: rgba(255, 255, 255, 0.5)"
-        >
+        <v-card elevation="2" class="bg-wave" light>
           <v-container>
             <v-row class="text-left">
               <v-col cols="12" md="12">
