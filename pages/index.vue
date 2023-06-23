@@ -51,19 +51,22 @@ export default {
           title: 'Admins Summary',
           summary: 0,
           color: 'green',
-          icon: 'mdi-account-box-outline'
+          icon: 'mdi-account-box-outline',
+          route: '/users'
         },
         gateway: {
           title: 'Gateway Summary',
           summary: 0,
           color: 'blue',
-          icon: 'mdi-router-wireless'
+          icon: 'mdi-router-wireless',
+          route: '/gateways'
         },
         node: {
           title: 'Nodes Summary',
           summary: 0,
           color: 'red',
-          icon: 'mdi-vibrate'
+          icon: 'mdi-vibrate',
+          route: '/nodes'
         }
       },
       loading: true,

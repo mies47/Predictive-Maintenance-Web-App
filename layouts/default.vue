@@ -241,6 +241,11 @@ export default {
           to: '/gateways'
         },
         {
+          icon: 'mdi-account',
+          title: 'Users',
+          to: '/users'
+        },
+        {
           icon: 'mdi-chart-bar',
           title: 'Charts',
           to: '/charts'

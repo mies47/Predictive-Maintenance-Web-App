@@ -37,6 +37,11 @@ const DASHBOARD = {
     route: '/gateways',
     url: '/gateways'
   },
+  Users: {
+    href: '/users.vue',
+    route: '/users',
+    url: '/users'
+  },
   FORM: {
     href: '/forms.vue',
     route: '/forms',

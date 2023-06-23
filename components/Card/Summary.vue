@@ -1,7 +1,7 @@
 <template>
   <v-row v-if="items && Object.entries(items).length">
     <v-col v-for="[k, v] of Object.entries(items)" :key="k" cols="6" sm="4">
-      <v-card height="100%" class="card">
+      <v-card height="100%" class="card" :to="v.route">
         <v-container fluid>
           <h3>{{ v.title }}</h3>
           <v-row height="100%">
