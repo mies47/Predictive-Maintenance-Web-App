@@ -218,26 +218,32 @@ export default {
               this.activeData.index[mId][index] = mdata.frequency
             })
           }
-          this.$axios.$get('/analytics/peaks').then((peakResult) => {
-            this.activeData.peaks = {}
-            for (const [mId, m] of Object.entries(peakResult[this.nodeId])) {
-              this.activeData.peaks[mId] = {}
-              m.forEach((mdata) => {
-                this.activeData.peaks[mId][mdata.frequency] = true
-              })
-            }
-          })
+          this.$axios
+            .$get('/analytics/peaks')
+            .then((peakResult) => {
+              this.activeData.peaks = {}
+              for (const [mId, m] of Object.entries(peakResult[this.nodeId])) {
+                this.activeData.peaks[mId] = {}
+                m.forEach((mdata) => {
+                  this.activeData.peaks[mId][mdata.frequency] = true
+                })
+              }
+            })
+            .catch((error) => {
+              this.error = error.toString()
+            })
+            .finally(() => {
+              this.loading = false
+            })
         })
         .catch((error) => {
           this.error = error.toString()
-        })
-        .finally(() => {
           this.loading = false
         })
     },
     handleVDT() {
       this.$axios
-        .$get(`/data/nodeData/${this.nodeId}`)
+        .$get(`/data/node/${this.nodeId}`)
         .then((result) => {
           this.measurements = Object.keys(result[this.nodeId])
           this.activeData.time = {}
